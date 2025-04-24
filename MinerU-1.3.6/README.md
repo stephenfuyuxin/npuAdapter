@@ -26,7 +26,9 @@
 
 # 参考链接
 MinerU github 链接: [MinerU github](https://github.com/opendatalab/MinerU)
+
 MinerU magic-pdf 工具: [MinerU magic-pdf Release](https://github.com/opendatalab/MinerU/releases)
+
 MinerU Command Line 参考: [MinerU Command Line](https://mineru.readthedocs.io/en/latest/user_guide/usage/command_line.html)
 
 # 版本配套关系
@@ -53,6 +55,7 @@ wget https://gcore.jsdelivr.net/gh/opendatalab/MinerU@master/scripts/download_mo
 python download_models.py
 ```
 脚本 `download_models.py` 会自动下载模型文件并配置好配置文件中的模型目录。
+
 配置文件可以在用户目录中找到，文件名为 `magic-pdf.json`，模型文件下载完成之后，这里显示如下，
 ```sh
 model_dir is: /root/.cache/modelscope/hub/opendatalab/PDF-Extract-Kit-1___0/models
@@ -256,6 +259,7 @@ from torch_npu.contrib import transfer_to_npu
 
 ## 修改 magic-pdf.json 文件
 在 [模型文件->下载](#下载) 章节中，执行 `download_models.py` 脚本自动生成用户目录下的 `magic-pdf.json` 文件，并自动配置默认模型路径。
+
 对于 Ascend NPU 场景，还需要额外修改 `device-mode` 为 `npu` ，执行以下操作，
 ```sh
 sed -i 's|cpu|npu|g' ~/magic-pdf.json
@@ -317,7 +321,9 @@ TypeError: snapshot_download() got an unexpected keyword argument 'allow_pattern
 xxxx-xx-xx xx:xx:xx.xxx | ERROR | magic_pdf.tools.cli:parse_doc:134 - data did not match any variant of untagged enum ModelWrapper at line 249230 column 3
 ```
 1、通常与 `transformers` 库的版本不兼容有关。检查当前使用的 `transformers` 库版本，并尝试升级到最新版本。实际调测，将 `transformers` 从 `4.42` 升级到 `4.47` 。
+
 2、因模型文件或配置文件存在损坏，确保使用的模型文件和配置文件是完整且未损坏。实际调测，重新下载模型文件确实存在retry的权重文件，多次下载确保无遗漏。
+
 按照上述操作，再无上述报错出现。
 
 ## 问题5 cannot import tv_tensors from torchvision_npu
