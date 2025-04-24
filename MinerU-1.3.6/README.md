@@ -258,7 +258,7 @@ from torch_npu.contrib import transfer_to_npu
 ```
 
 ## 修改 magic-pdf.json 文件
-在 [模型文件->下载](#下载) 章节中，执行 `download_models.py` 脚本自动生成用户目录下的 `magic-pdf.json` 文件，并自动配置默认模型路径。
+在 [下载](#下载) 章节中，执行 `download_models.py` 脚本自动生成用户目录下的 `magic-pdf.json` 文件，并自动配置默认模型路径。
 
 对于 Ascend NPU 场景，还需要额外修改 `device-mode` 为 `npu` ，执行以下操作，
 ```sh
