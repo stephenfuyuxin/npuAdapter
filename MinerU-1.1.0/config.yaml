@@ -21,7 +21,10 @@ Det:
     use_dml: false
 
     model_path: models/ch_PP-OCRv4_det_infer.onnx
+    # add .om full path, for user of root
     om_model_path: /usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_PP-OCRv4_det_infer_linux_aarch64.om
+    # add .om full path, for user of mineru
+    # om_model_path: /home/mineru/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_PP-OCRv4_det_infer_linux_aarch64.om
 
     limit_side_len: 736
     limit_type: min
@@ -43,7 +46,10 @@ Cls:
     use_dml: false
 
     model_path: models/ch_ppocr_mobile_v2.0_cls_infer.onnx
+    # add .om full path, for user of root
     om_model_path: /usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_ppocr_mobile_v2.0_cls_infer_linux_aarch64.om
+    # add .om full path, for user of mineru
+    # om_model_path: /home/mineru/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_ppocr_mobile_v2.0_cls_infer_linux_aarch64.om
 
     cls_image_shape: [3, 48, 192]
     cls_batch_num: 6
@@ -58,7 +64,10 @@ Rec:
     use_dml: false
 
     model_path: models/ch_PP-OCRv4_rec_infer.onnx
+    # add .om full path, for user of root
     om_model_path: /usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_PP-OCRv4_rec_infer_linux_aarch64.om
+    # add .om full path, for user of mineru
+    # om_model_path: /home/mineru/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_PP-OCRv4_rec_infer_linux_aarch64.om
 
     rec_img_shape: [3, 48, 320]
     rec_batch_num: 6
