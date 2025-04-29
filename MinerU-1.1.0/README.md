@@ -361,6 +361,18 @@ class ModifiedPaddleOCR(PaddleOCR):
 ## 修改 magic-pdf.json 文件
 在 [下载](#下载) 章节中，执行 `download_models.py` 脚本自动生成用户目录下的 `magic-pdf.json` 文件，并自动配置默认模型路径。
 
+设置 `models-dir` 和 `layoutreader-model-dir`，这部分通过 `download_models.py` 下载模型文件时会自动配置，举例说明不同用户的差异，且仅支持绝对路径写法，
+
+root用户
+```sh
+    "models-dir": "/root/.cache/modelscope/hub/opendatalab/PDF-Extract-Kit-1___0/models",
+    "layoutreader-model-dir": "/root/.cache/modelscope/hub/ppaanngggg/layoutreader",
+```
+非root用户，如mineru用户
+```sh
+    "models-dir": "/home/mineru/.cache/modelscope/hub/opendatalab/PDF-Extract-Kit-1___0/models",
+    "layoutreader-model-dir": "/home/mineru/.cache/modelscope/hub/ppaanngggg/layoutreader",
+```
 对于 Ascend NPU 场景，还需要额外修改 `device-mode` 为 `npu` ，执行以下操作，
 ```sh
 sed -i 's|cpu|npu|g' ~/magic-pdf.json
@@ -415,7 +427,7 @@ TypeError: snapshot_download() got an unexpected keyword argument 'allow_pattern
 45     model_dir = snapshot_download('opendatalab/PDF-Extract-Kit-1.0')
 ```
 
-## 问题4 算子 torchvision:nms 运行在 CPU 上
+## 问题4 算子 torchvision-nms 运行在 CPU 上
 类似如下，
 ```sh
 [W compiler_depend.ts:51] Warning: CAUTION: The operator 'torchvision::nms' is not currently supported on the NPU backend and will fall back to run on the CPU. This may have performance implications. (function npu_cpu_fallback)
