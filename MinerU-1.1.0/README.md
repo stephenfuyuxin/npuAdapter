@@ -309,6 +309,7 @@ magic-pdf 默认 `rapid_table` 表格处理，通过 `slanet_plus.onnx` 进行�
         "sub_model": "slanet_plus",
         "enable": true,
         "max_time": 400
+    },
 ```
 可按需增加 `unitable` 推理分支，即仍接入 `rapid_table` 模型，将 `sub_model` 改为 `ubitable` 分支，
 ```json
@@ -317,6 +318,7 @@ magic-pdf 默认 `rapid_table` 表格处理，通过 `slanet_plus.onnx` 进行�
         "sub_model": "unitable",
         "enable": true,
         "max_time": 400
+    },
 ```
 注，`rapid_table` 对应一整页的、行数比较长的表格，效果不是很好，存在直接少整列、行之间错乱的情况。对比下来 `rapid_table` 的 `unitable` 模型识别效果最好，但性能较差。
 
