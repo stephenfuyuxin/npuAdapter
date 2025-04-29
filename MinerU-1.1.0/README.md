@@ -24,7 +24,8 @@
   - [问题1 下载模型文件时若出现代理相关报错](#问题1-下载模型文件时若出现代理相关报错)
   - [问题2 下载模型文件时若出现认证相关报错](#问题2-下载模型文件时若出现认证相关报错)
   - [问题3 执行模型下载操作时候，出现传参错误](#问题3-执行模型下载操作时候，出现传参错误)
-  - [问题4 算子 torchvision:nms 运行在 CPU 上](#问题4-算子-torchvision:nms-运行在-CPU-上)
+  - [问题4 算子 torchvision-nms 运行在 CPU 上](#问题4-算子-torchvision-nms-运行在-CPU-上)
+  - [问题5 有关 acl 尝试销毁的 Stream 不在当前上下文而报错销毁失败](#问题5-有关-acl-尝试销毁的-Stream-不在当前上下文而报错销毁失败)
 
 # 参考链接
 MinerU github 链接: [MinerU github](https://github.com/opendatalab/MinerU)
@@ -32,6 +33,8 @@ MinerU github 链接: [MinerU github](https://github.com/opendatalab/MinerU)
 MinerU magic-pdf 工具: [MinerU magic-pdf Release](https://github.com/opendatalab/MinerU/releases)
 
 MinerU Command Line 参考: [MinerU Command Line](https://mineru.readthedocs.io/en/latest/user_guide/usage/command_line.html)
+
+工程化使用可参考 `dockerbuild/Ascend/Template/README.md`，并根据实际情况进行修改以适配构建工程
 
 # 版本配套关系
 **表1** 版本配套表，
@@ -87,13 +90,13 @@ download https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_cl
 2025-04-25 07:52:03,667 - DownloadModel - DEBUG: /usr/local/python3.10.14/lib/python3.10/site-packages/rapid_table/models/slanet-plus.onnx already exists
 [2025-04-25 07:52:03,667] [DEBUG] download_model.py:34 - /usr/local/python3.10.14/lib/python3.10/site-packages/rapid_table/models/slanet-plus.onnx already exists
 ```
-这些文件通常用于部署 `PaddleOCR` 模型时，加载预训练的权重和配置，以便快速实现文本检测、识别和方向分类等功能，详细说明如下，
+这些文件通常用于部署 `PaddleOCR` 模型时，加载预训练的权重和配置，以便快速实现文本检测、识别和方向分类等功能，
 
-- `ch_PP-OCRv4_det_infer.tar` 是 `PaddleOCR v4` 中文文本检测（Detection）模型文件。它用于识别图像中文字的位置和边界框；
+- `ch_PP-OCRv4_det_infer.tar` 是 `PaddleOCRv4` 中文文本检测（Detection）模型文件。识别图像中文字位置和边界；
 
-- `ch_PP-OCRv4_rec_infer.tar` 是 `PaddleOCR v4` 中文文本识别（Recognition）模型文件。它用于识别检测到的文本区域中的具体文字内容；
+- `ch_PP-OCRv4_rec_infer.tar` 是 `PaddleOCRv4` 中文文本识别（Recognition）模型文件。识别已检测文本区域具体文字内容；
 
-- `ch_ppocr_mobile_v2.0_cls_infer.tar` 是 `PaddleOCR Mobile v2.0` 中文方向分类（Classification）模型文件。它用于判断文本的方向（例如水平、竖直等），以便更好地处理不同方向的文本；
+- `ch_ppocr_mobile_v2.0_cls_infer.tar` 是 `PaddleOCR Mobile v2.0` 中文方向分类（Classification）模型文件。判断文本方向（例如水平、竖直等），以便更好地处理不同方向的文本；
 
 这部分也可以进行压缩，`tar` 包在工程化构建时可通过 `wget` 传输到镜像构建工程时解压缩使用。
 ```sh
@@ -417,4 +420,18 @@ TypeError: snapshot_download() got an unexpected keyword argument 'allow_pattern
 ```sh
 [W compiler_depend.ts:51] Warning: CAUTION: The operator 'torchvision::nms' is not currently supported on the NPU backend and will fall back to run on the CPU. This may have performance implications. (function npu_cpu_fallback)
 ```
-目前 `torchvision_npu` 仅有 `0.16.0` 的配套，因此，`torch` 与 `torchvision` 对应使用 `2.1.0` 和 `0.16.0` 的配套。
+引入 `torchvision_npu` 将 `torchvision` 相关算子运行在 npu 上，目前 `torchvision_npu` 仅有 `0.16.0` 的配套，因此，`torch` 与 `torchvision` 对应使用 `2.1.0` 和 `0.16.0` 的配套。
+
+## 问题5 有关 acl 尝试销毁的 Stream 不在当前上下文而报错销毁失败
+类似如下，
+```python
+[Error]: The stream is not in the current context.
+        Check whether the context where the stream is located is the same as the current context.
+EE9999: Inner Error!
+EE9999: [PID: 65276] 2025-04-27-08:22:06.816.143 Stream destroy failed, stream is not in current ctx, stream_id=2.[FUNC:StreamDestroy][FILE:api_impl.cc][LINE:1096]
+        TraceBack (most recent call last):
+       rtStreamDestroyForce execute failed, reason=[stream not in current context][FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:53]
+       destroy stream force failed, runtime result = 107003[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:161]
+ (function operator())
+```
+报错并未产生实质性影响，推理结果仍然以 `output` 的形式输出完毕，大概推理结束后 `acl.session` 并未正常结束退出的报错。
