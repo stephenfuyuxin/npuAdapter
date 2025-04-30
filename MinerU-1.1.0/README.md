@@ -6,19 +6,19 @@
   - [下载](#下载)
   - [压缩/解压缩](#压缩/解压缩)
 - [修改记录](#修改记录)
-  - [修改 doc_analyze_by_custom_model.py 文件](#修改-doc_analyze_by_custom_model.py-文件)
+  - [修改 doc_analyze_by_custom_model 文件](#修改-doc_analyze_by_custom_model-文件)
   - [onnx 转 om](#onnx-转-om)
-  - [修改 det、rec、utility 文件](#修改-det、rec、utility-文件)
+  - [修改 det rec utility 文件](#修改-det-rec-utility-文件)
     - [det](#det)
     - [rec](#rec)
     - [utility](#utility)
-  - [修改 config.yaml 文件](#修改-config.yaml-文件)
-  - [修改 infer_engine.py 文件](#修改-infer_engine.py-文件)
-  - [修改 rapid_table.py 文件](#修改-rapid_table.py-文件)
-  - [修改 magic-pdf.json 新增 unitable 推理分支](#修改-magic-pdf.json-新增-unitable-推理分支)
+  - [修改 config 文件](#修改-config-文件)
+  - [修改 infer_engine 文件](#修改-infer_engine-文件)
+  - [修改 rapid_table 文件](#修改-rapid_table-文件)
+  - [修改 magic-pdf 新增 unitable 推理分支](#修改-magic-pdf-新增-unitable-推理分支)
     - [unitable 模型权重](#unitable-模型权重)
-    - [修改 ppocr_273_mod.py 文件](#修改-ppocr_273_mod.py-文件)
-  - [修改 magic-pdf.json 文件](#修改-magic-pdf.json-文件)
+    - [修改 ppocr_273_mod 文件](#修改-ppocr_273_mod-文件)
+  - [修改 magic-pdf 文件](#修改-magic-pdf-文件)
 - [通过 magic-pdf 进行推理](#通过-magic-pdf-进行推理)
 - [FAQ](#FAQ)
   - [问题1 下载模型文件时若出现代理相关报错](#问题1-下载模型文件时若出现代理相关报错)
@@ -110,7 +110,7 @@ tar -xzvf paddleocr.tar -C ~
 
 # 修改记录
 
-## 修改 doc_analyze_by_custom_model.py 文件
+## 修改 doc_analyze_by_custom_model 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/magic_pdf/model`
 ```sh
 cp doc_analyze_by_custom_model.py doc_analyze_by_custom_model.py.bak
@@ -142,7 +142,7 @@ ch_PP-OCRv4_det_infer_linux_aarch64.om
 ch_PP-OCRv4_rec_infer_linux_aarch64.om
 ```
 
-## 修改 det、rec、utility 文件
+## 修改 det rec utility 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/paddleocr/tools/infer`
 ```sh
 cp predict_det.py predict_det.py.bak
@@ -192,7 +192,7 @@ vim utility.py
 192         return sess, sess.get_inputs()[0], None, None
 ```
 
-## 修改 config.yaml 文件
+## 修改 config 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime`
 ```sh
 cp config.yaml config.yaml.bak
@@ -211,7 +211,7 @@ vim config.yaml
 61     om_model_path: /usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_PP-OCRv4_rec_infer_linux_aarch64.om
 ```
 
-## 修改 infer_engine.py 文件
+## 修改 infer_engine 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/utils`
 ```sh
 cp infer_engine.py infer_engine.py.bak
@@ -262,7 +262,7 @@ class OrtInferSession:
             raise ONNXRuntimeError(error_info) from e
 ```
 
-## 修改 rapid_table.py 文件
+## 修改 rapid_table 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/magic_pdf/model/sub_modules/table/rapidtable`
 ```sh
 cp rapid_table.py rapid_table.py.bak
@@ -301,8 +301,8 @@ from torch_npu.contrib import transfer_to_npu
         self.ocr_engine = RapidOCR()
 ```
 
-## 修改 magic-pdf.json 新增 unitable 推理分支
-magic-pdf 默认 `rapid_table` 表格处理，通过 `slanet_plus.onnx` 进行特定优化或增强处理，以下为修改 `magic-pdf.json` 配置项举例，
+## 修改 magic-pdf 新增 unitable 推理分支
+magic-pdf.json 默认 `rapid_table` 表格处理，通过 `slanet_plus.onnx` 进行特定优化或增强处理，以下为修改 `magic-pdf.json` 配置项举例，
 ```json
     "table-config": {
         "model": "rapid_table",
@@ -335,7 +335,7 @@ magic-pdf 默认 `rapid_table` 表格处理，通过 `slanet_plus.onnx` 进行�
 ```
 其中，`rapid_table` 默认是 `slanet_plus` 这个模型，升级 `rapid_table` 并支持 `unitable` 这个模型需要额外的 `.pth` 权重及 `json` 文件。
 
-### 修改 ppocr_273_mod.py 文件
+### 修改 ppocr_273_mod 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/magic_pdf/model/sub_modules/ocr/paddleocr`
 ```sh
 cp ppocr_273_mod.py ppocr_273_mod.py.bak
@@ -360,7 +360,7 @@ class ModifiedPaddleOCR(PaddleOCR):
         self.additional_ocr = onnx_model_manager.get_onnx_model(**kwargs)
 ```
 
-## 修改 magic-pdf.json 文件
+## 修改 magic-pdf 文件
 在 [下载](#下载) 章节中，执行 `download_models.py` 脚本自动生成用户目录下的 `magic-pdf.json` 文件，并自动配置默认模型路径。
 
 设置 `models-dir` 和 `layoutreader-model-dir`，这部分通过 `download_models.py` 下载模型文件时会自动配置，举例说明不同用户的差异，且仅支持绝对路径写法，
