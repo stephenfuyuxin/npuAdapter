@@ -4,7 +4,7 @@
 - [版本配套关系](#版本配套关系)
 - [模型文件](#模型文件)
   - [下载](#下载)
-  - [压缩/解压缩](#压缩/解压缩)
+  - [压缩与解压缩](#压缩与解压缩)
 - [修改记录](#修改记录)
   - [修改 doc_analyze_by_custom_model 文件](#修改-doc_analyze_by_custom_model-文件)
   - [onnx 转 om](#onnx-转-om)
@@ -23,7 +23,7 @@
 - [FAQ](#FAQ)
   - [问题1 下载模型文件时若出现代理相关报错](#问题1-下载模型文件时若出现代理相关报错)
   - [问题2 下载模型文件时若出现认证相关报错](#问题2-下载模型文件时若出现认证相关报错)
-  - [问题3 执行模型下载操作时候，出现传参错误](#问题3-执行模型下载操作时候，出现传参错误)
+  - [问题3 执行模型下载操作时出现传参错误](#问题3-执行模型下载操作时出现传参错误)
   - [问题4 算子 torchvision-nms 运行在 CPU 上](#问题4-算子-torchvision-nms-运行在-CPU-上)
   - [问题5 有关 acl 尝试销毁的 Stream 不在当前上下文而报错销毁失败](#问题5-有关-acl-尝试销毁的-Stream-不在当前上下文而报错销毁失败)
 
@@ -69,7 +69,7 @@ The configuration file has been configured successfully, the path is: /root/magi
 ```
 注：文件 `magic-pdf.json` 后面会用到，需保留。
 
-## 压缩/解压缩
+## 压缩与解压缩
 下载完的模型文件进行压缩，`tar` 包在工程化构建时可通过 `wget` 传输到镜像构建工程时解压缩使用。
 ```sh
 cd ~/.cache/
@@ -415,7 +415,7 @@ To connect to gcore.jsdelivr.net insecurely, use `--no-check-certificate'.
 wget https://gcore.jsdelivr.net/gh/opendatalab/MinerU@master/scripts/download_models.py -O download_models.py --no-check-certificate
 ```
 
-## 问题3 执行模型下载操作时候，出现传参错误
+## 问题3 执行模型下载操作时出现传参错误
 类似如下，
 ```sh
 Traceback (most recent call last):
