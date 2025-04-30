@@ -4,23 +4,23 @@
 - [版本配套关系](#版本配套关系)
 - [模型文件](#模型文件)
   - [下载](#下载)
-  - [压缩/解压缩](#压缩/解压缩)
+  - [压缩与解压缩](#压缩与解压缩)
 - [修改记录](#修改记录)
-  - [修改 doc_analyze_by_custom_model.py 文件](#修改-doc_analyze_by_custom_model.py-文件)
+  - [修改 doc_analyze_by_custom_model 文件](#修改-doc_analyze_by_custom_model-文件)
   - [onnx 转 om](#onnx-转-om)
-  - [修改 det、rec、utility 文件](#修改-det、rec、utility-文件)
+  - [修改 det rec utility 文件](#修改-det-rec-utility-文件)
     - [det](#det)
     - [rec](#rec)
     - [utility](#utility)
-  - [修改 config.yaml 文件](#修改-config.yaml-文件)
-  - [修改 infer_engine.py 文件](#修改-infer_engine.py-文件)
-  - [修改 rapid_table.py 文件](#修改-rapid_table.py-文件)
-  - [修改 magic-pdf.json 文件](#修改-magic-pdf.json-文件)
+  - [修改 config 文件](#修改-config-文件)
+  - [修改 infer_engine 文件](#修改-infer_engine-文件)
+  - [修改 rapid_table 文件](#修改-rapid_table-文件)
+  - [修改 magic-pdf 文件](#修改-magic-pdf-文件)
 - [通过 magic-pdf 进行推理](#通过-magic-pdf-进行推理)
 - [FAQ](#FAQ)
   - [问题1 下载模型文件时若出现代理相关报错](#问题1-下载模型文件时若出现代理相关报错)
   - [问题2 下载模型文件时若出现认证相关报错](#问题2-下载模型文件时若出现认证相关报错)
-  - [问题3 执行模型下载操作时候，出现传参错误](#问题3-执行模型下载操作时候，出现传参错误)
+  - [问题3 执行模型下载操作时出现传参错误](#问题3-执行模型下载操作时出现传参错误)
   - [问题4 data did not match any variant of untagged enum ModelWrapper](#问题4-data-did-not-match-any-variant-of-untagged-enum-ModelWrapper)
   - [问题5 cannot import tv_tensors from torchvision_npu](#问题5-cannot-import-name-tv_tensors-from-torchvision_npu)
 
@@ -64,7 +64,7 @@ The configuration file has been configured successfully, the path is: /root/magi
 ```
 注：文件 `magic-pdf.json` 后面会用到，需保留。
 
-## 压缩/解压缩
+## 压缩与解压缩
 下载完的模型文件进行压缩，`tar` 包在工程化构建时可通过 `wget` 传输到镜像构建工程时解压缩使用。
 ```sh
 cd ~/.cache/
@@ -77,7 +77,7 @@ tar -xzvf mineru-modelscope.tar -C ~/.cache/
 
 # 修改记录
 
-## 修改 doc_analyze_by_custom_model.py 文件
+## 修改 doc_analyze_by_custom_model 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/magic_pdf/model`
 ```sh
 cp doc_analyze_by_custom_model.py doc_analyze_by_custom_model.py.bak
@@ -109,7 +109,7 @@ ch_PP-OCRv4_det_infer_linux_aarch64.om
 ch_PP-OCRv4_rec_infer_linux_aarch64.om
 ```
 
-## 修改 det、rec、utility 文件
+## 修改 det rec utility 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/paddleocr/tools/infer`
 ```sh
 cp predict_det.py predict_det.py.bak
@@ -159,7 +159,7 @@ vim utility.py
 192         return sess, sess.get_inputs()[0], None, None
 ```
 
-## 修改 config.yaml 文件
+## 修改 config 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime`
 ```sh
 cp config.yaml config.yaml.bak
@@ -178,7 +178,7 @@ vim config.yaml
 61     om_model_path: /usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/models/ch_PP-OCRv4_rec_infer_linux_aarch64.om
 ```
 
-## 修改 infer_engine.py 文件
+## 修改 infer_engine 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/rapidocr_onnxruntime/utils`
 ```sh
 cp infer_engine.py infer_engine.py.bak
@@ -229,7 +229,7 @@ class OrtInferSession:
             raise ONNXRuntimeError(error_info) from e
 ```
 
-## 修改 rapid_table.py 文件
+## 修改 rapid_table 文件
 python安装路径，如 `/usr/local/python3.10.14/lib/python3.10/site-packages/magic_pdf/model/sub_modules/table/rapidtable`
 ```sh
 cp rapid_table.py rapid_table.py.bak
@@ -257,7 +257,7 @@ from torch_npu.contrib import transfer_to_npu
         self.ocr_engine = ocr_engine
 ```
 
-## 修改 magic-pdf.json 文件
+## 修改 magic-pdf 文件
 在 [下载](#下载) 章节中，执行 `download_models.py` 脚本自动生成用户目录下的 `magic-pdf.json` 文件，并自动配置默认模型路径。
 
 对于 Ascend NPU 场景，还需要额外修改 `device-mode` 为 `npu` ，执行以下操作，
@@ -301,7 +301,7 @@ To connect to gcore.jsdelivr.net insecurely, use `--no-check-certificate'.
 wget https://gcore.jsdelivr.net/gh/opendatalab/MinerU@master/scripts/download_models.py -O download_models.py --no-check-certificate
 ```
 
-## 问题3 执行模型下载操作时候，出现传参错误
+## 问题3 执行模型下载操作时出现传参错误
 类似如下，
 ```sh
 Traceback (most recent call last):
