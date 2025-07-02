@@ -1,0 +1,163 @@
+HwHiAiUser@ak-g5680v2-1003:/data/fuyuxin/zhaohang/RMBG2.0/RMBG-2.0$ vim example.py
+HwHiAiUser@ak-g5680v2-1003:/data/fuyuxin/zhaohang/RMBG2.0/RMBG-2.0$
+HwHiAiUser@ak-g5680v2-1003:/data/fuyuxin/zhaohang/RMBG2.0/RMBG-2.0$ python3 example.py
+/home/HwHiAiUser/.local/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:301: ImportWarning:
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.npu and torch.nn.Module.npu now..
+    The torch.cuda.DoubleTensor is replaced with torch.npu.FloatTensor cause the double type is not supported now..
+    The backend in torch.distributed.init_process_group set to hccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.npu.* and torch.npu.amp.* now..
+    The device parameters have been replaced with npu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Generator, torch.set_default_device, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+
+  warnings.warn(msg, ImportWarning)
+/home/HwHiAiUser/.local/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:260: RuntimeWarning: torch.jit.script and torch.jit.script_method will be disabled by transfer_to_npu, which currently does not support them, if you need to enable them, please do not use transfer_to_npu.
+  warnings.warn(msg, RuntimeWarning)
+/home/HwHiAiUser/.local/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/HwHiAiUser/.local/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+[W compiler_depend.ts:51] Warning: CAUTION: The operator 'torchvision::deform_conv2d' is not currently supported on the NPU backend and will fall back to run on the CPU. This may have performance implications. (function npu_cpu_fallback)
+..[W compiler_depend.ts:137] Warning: Warning: Device do not support double dtype now, dtype cast repalce with float. (function operator())
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================35.88498020172119
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.72903323173523
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.298438310623169
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================18.135645627975464
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================15.641045331954956
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.42909288406372
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.381017446517944
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.166500568389893
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.7012460231781
+tensor([[[[5.3099e-09, 8.4707e-09, 8.9478e-09,  ..., 6.5125e-09,
+           8.6235e-09, 6.1735e-09],
+          [7.1425e-09, 1.7347e-08, 2.0874e-08,  ..., 1.8125e-08,
+           1.9959e-08, 7.9807e-09],
+          [6.7694e-09, 2.0327e-08, 2.8352e-08,  ..., 2.6542e-08,
+           2.2829e-08, 7.0115e-09],
+          ...,
+          [8.9862e-07, 4.2809e-07, 2.0537e-07,  ..., 3.7368e-08,
+           2.0982e-08, 4.6948e-09],
+          [8.0604e-07, 3.0729e-07, 1.1425e-07,  ..., 3.0652e-08,
+           1.9658e-08, 5.5744e-09],
+          [7.5799e-07, 2.4066e-07, 7.9443e-08,  ..., 1.4354e-08,
+           1.0148e-08, 4.8061e-09]]]], device='npu:0')
+======================================13.719458818435669
+HwHiAiUser@ak-g5680v2-1003:/data/fuyuxin/zhaohang/RMBG2.0/RMBG-2.0$
