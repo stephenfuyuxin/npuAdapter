@@ -27,6 +27,19 @@ package_version=24.1.rc3
 compatible_version_drv=[23.0.0,23.0.0.],[24.0,24.0.],[24.1,24.1.]
 ```
 
+# npu-smi info
+910b4 32G 8卡
+```shell
+# npu-smi info
++---------------------------+---------------+----------------------------------------------------+
+| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|
+| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |
++===========================+===============+====================================================+
+| 0     910B4               | OK            | 86.0        40                0    / 0             |
+| 0                         | 0000:00:00.0  | 0           0    / 0          2828 / 32768         |
++===========================+===============+====================================================+
+```
+
 # docker images& docker run
 ## docker images
 昇腾镜像仓库：https://www.hiascend.com/developer/ascendhub/detail/af85b724a7e5469ebd7ea13c3439d48f
