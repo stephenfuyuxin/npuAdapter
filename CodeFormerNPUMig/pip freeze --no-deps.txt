@@ -1,0 +1,157 @@
+CodeFormer]# pip freeze
+ERROR: Error [Errno 2] No such file or directory: 'git' while executing command git config --get-regexp 'remote\..*\.url'
+WARNING: cannot determine version of editable source in /home/fuyuxin/cfwd/CodeFormer (git command not found in path)
+absl-py==2.1.0
+accelerate==0.34.2
+addict==2.4.0
+aiohappyeyeballs==2.6.1
+aiohttp==3.11.18
+aiosignal==1.3.2
+annotated-types==0.7.0
+ascendie @ file:///usr/local/Ascend/mindie/temp/mindie-rt/2.0.RC2/bin/ascendie-2.0rc2-py3-none-any.whl#sha256=8a585d8787a4d1b71936312cc404619db408e54c4d7deb612c3928f1095339c9
+attrs==24.2.0
+auto_tune @ file:///root/selfgz878613117/compiler/lib64/auto_tune-0.1.0-py3-none-any.whl#sha256=5ae8a45e21fd5642c1fb4c01c21523bfc673adaa319a20b054aedbba599aecfc
+-e /home/fuyuxin/cfwd/CodeFormer
+beautifulsoup4==4.13.4
+Brotli==1.1.0
+certifi==2024.8.30
+cffi==1.17.1
+charset-normalizer==3.3.2
+click==8.1.7
+cloudpickle==3.0.0
+colorama==0.4.6
+contourpy==1.3.0
+cpm-kernels==1.0.11
+cycler==0.12.1
+dataflow @ file:///root/selfgz878613117/compiler/lib64/dataflow-0.0.1-py3-none-any.whl#sha256=fab7343d7196baf24820a09f75dbb5831950c1d8bee0011953b48391d84584ec
+decorator==5.1.1
+dlib==20.0.0
+easydict==1.13
+einops==0.8.1
+et-xmlfile==1.1.0
+filelock==3.16.1
+fonttools==4.54.1
+frozenlist==1.6.0
+fsspec==2024.9.0
+future==1.0.0
+fuzzywuzzy==0.18.0
+gdown==5.2.0
+gevent==24.2.1
+geventhttpclient==2.3.1
+gpg==1.21.0
+greenlet==3.1.1
+grpcio==1.66.1
+hccl @ file:///root/selfgz246312976/hccl/lib64/hccl-0.1.0-py3-none-any.whl#sha256=81805f78acf5e94140daae9ccf7db0cde2873518140ac2bf633dc31d7c1f0df5
+hccl_parser @ file:///usr/local/Ascend/ascend-toolkit/8.1.RC1/toolkit/tools/hccl_parser-0.1-py3-none-any.whl#sha256=37541281a74de6ae3f8a15c77e1df8cf899bcbeb391a9a47ecfb582caf695fd8
+huggingface-hub==0.25.1
+icetk==0.0.4
+idna==3.10
+imageio==2.37.0
+jieba==0.42.1
+Jinja2==3.1.4
+joblib==1.4.2
+jsonlines==4.0.0
+kiwisolver==1.4.7
+latex2mathml==3.77.0
+lazy_loader==0.4
+libclang==18.1.1
+libcomps==0.1.19
+llm_datadist @ file:///root/selfgz878613117/compiler/lib64/llm_datadist-0.0.1-py3-none-any.whl#sha256=d55c8c3935fa9dc7cd05d1f47a1bc5c11e485de5e23dcd026a20928b58826a60
+llm_manager_python_api_demo @ file:///usr/local/Ascend/mindie/temp/mindie_llm/2.0.RC2/bin/llm_manager_python_api_demo-2.0rc2-py3-none-any.whl#sha256=e3c477981f7a708afc28d072d7fccafc55fb5dac91e2ff819271a6124e734eba
+llvmlite==0.44.0
+lmdb==1.6.2
+loguru==0.7.2
+lpips==0.1.4
+lxml==5.3.0
+Markdown==3.7
+MarkupSafe==2.1.5
+matplotlib==3.9.2
+mdtex2html==1.3.0
+mies_tokenizer @ file:///usr/local/Ascend/mindie/temp/mindie-service/2.0.RC2/bin/mies_tokenizer-0.0.1-py3-none-any.whl#sha256=01e72b7e8b352b44cdf58260961a701b9964c71772ed668569cde5e0701db244
+mindie_llm @ file:///usr/local/Ascend/mindie/temp/mindie_llm/2.0.RC2/bin/mindie_llm-2.0rc2-py3-none-any.whl#sha256=b582235fe2512b4fa8e422bd4138d628ca7e445f4433661ee46116a0a84209f3
+mindiebenchmark @ file:///usr/local/Ascend/mindie/temp/mindie-service/2.0.RC2/bin/mindiebenchmark-2.0rc2-py3-none-any.whl#sha256=34e252fac4154277fcc646dc2df5fd6f59b6f57f46b8dc0300d327e881903773
+mindieclient @ file:///usr/local/Ascend/mindie/temp/mindie-service/2.0.RC2/bin/mindieclient-2.0rc2-py3-none-any.whl#sha256=7494d6fe072f1f0285d2a8842d98b06485910c1622743ed2c4c49dde2d58eb04
+mindiesd @ file:///root/selfgz206902/Ascend-mindie-sd_2.0.RC2_py311_linux_aarch64/mindiesd-2.0rc2-py3-none-any.whl#sha256=c12470dfa546d3ce5f1a94cc1bd111afb766d033eaa91c31bfaf5993e48ab9fd
+mindiesimulator @ file:///usr/local/Ascend/mindie/temp/mindie-service/2.0.RC2/bin/mindiesimulator-0.0.1-py3-none-any.whl#sha256=31c005a2c73b88d8eb5a313aa2e6034fc1cb9c0cc9306baec6470f0a4916c0dd
+mindietorch @ file:///root/selfgz206902/Ascend-mindie-torch-2.0.RC2-linux-aarch64/mindietorch-2.0rc2%2Btorch2.1.0.abi0-cp311-cp311-linux_aarch64.whl#sha256=77b8c2976a46a307cbe20ca70b83e6859b3e659dfe7602101a2fbb6b9fda1390
+ml_dtypes==0.5.0
+model_wrapper @ file:///usr/local/Ascend/mindie/temp/mindie_llm/2.0.RC2/bin/model_wrapper-0.0.1-py3-none-any.whl#sha256=b7b59bf5326b3a907bb41fd308fd8f1ad1e571c483989a8a4a5080357685ad40
+mpmath==1.3.0
+msit @ file:///opt/package/msit/msit
+msit-llm @ file:///usr/local/lib/python3.11/site-packages/components/llm
+msmodelslim @ file:///opt/package/msit/msmodelslim
+msobjdump @ file:///usr/local/Ascend/ascend-toolkit/8.1.RC1/toolkit/tools/msobjdump-0.1.0-py3-none-any.whl#sha256=9ecf6bf7680333f7bf138c2fb10a512ed183ceb63b63764e775895b31f72fad3
+multidict==6.4.4
+networkx==3.3
+nltk==3.9.1
+numba==0.61.2
+numpy==1.26.4
+onnx==1.18.0
+op_compile_tool @ file:///root/selfgz878613117/compiler/lib64/op_compile_tool-0.1.0-py3-none-any.whl#sha256=6c2d27cab88e642baa565cf3093e5c057300b32f68e83ebca34f136126a69e92
+op_gen @ file:///usr/local/Ascend/ascend-toolkit/8.1.RC1/toolkit/tools/op_gen-0.1-py3-none-any.whl#sha256=db2b76ec8aa60b562f51e6e33d125a6ca2338d76d03c19a809c63d587cd5c7f6
+op_test_frame @ file:///usr/local/Ascend/ascend-toolkit/8.1.RC1/toolkit/tools/op_test_frame-0.1-py3-none-any.whl#sha256=05e08ef734c52c5cf19d474d99d064b7901484fe5e03befa32bb4327a67c99eb
+opc_tool @ file:///root/selfgz878613117/compiler/lib64/opc_tool-0.1.0-py3-none-any.whl#sha256=0e0d300fb404c9d7c802ee8c57a09741dcb831402062701b237436206061cda7
+opencv-python==4.11.0.86
+openpyxl==3.1.5
+packaging==24.1
+pandas==2.2.3
+pathlib2==2.3.7.post1
+pillow==10.4.0
+platformdirs==4.3.8
+portalocker==2.10.1
+prettytable==3.11.0
+propcache==0.3.1
+protobuf==6.31.0
+psutil==6.0.0
+pyarrow==17.0.0
+pycparser==2.22
+pydantic==2.9.2
+pydantic_core==2.23.4
+pyparsing==3.1.4
+PySocks==1.7.1
+python-dateutil==2.9.0.post0
+python-rapidjson==1.20
+pytz==2024.2
+PyYAML==6.0.2
+RapidFuzz==3.10.0
+regex==2024.9.11
+requests==2.32.3
+rouge==1.0.1
+rouge-score==0.1.2
+rpm==4.18.2
+sacrebleu==2.4.3
+safetensors==0.4.5
+schedule_search @ file:///root/selfgz878613117/compiler/lib64/schedule_search-0.1.0-py3-none-any.whl#sha256=52f419189bd201f3ff07a840ba3b607f9fe6888e32abceba3f0bcc84d7cff62d
+scikit-image==0.25.2
+scipy==1.14.1
+sentencepiece==0.2.0
+show_kernel_debug_data @ file:///usr/local/Ascend/ascend-toolkit/8.1.RC1/toolkit/tools/show_kernel_debug_data-0.1.0-py3-none-any.whl#sha256=33333537bad1e8e80280febb19bbe99d964f092c9e72ab96d0e4e2b41e9559b9
+six==1.16.0
+soupsieve==2.7
+sympy==1.13.3
+tabulate==0.9.0
+tb-nightly==2.20.0a20250629
+te @ file:///root/selfgz878613117/compiler/lib64/te-0.4.0-py3-none-any.whl#sha256=058f7f2855df219e09d49e602040ab07783cb519b9d6bb6edf925c1056af1de3
+tensorboard-data-server==0.7.2
+termcolor==2.4.0
+text-generation==0.7.0
+thefuzz==0.22.1
+tifffile==2025.6.11
+tiktoken==0.7.0
+tokenizers==0.19.1
+torch==2.1.0
+torch-npu @ file:///opt/package/torch_npu-2.1.0.post12-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl#sha256=d37f105bb9b37ad4042dffbb2e3c304de50722f7e8961d78b6a09e3e2fa14958
+torchvision==0.16.0
+tornado==6.4.1
+tqdm==4.66.5
+transformers==4.44.0
+tritonclient==2.49.0
+typing_extensions==4.12.2
+tzdata==2024.2
+urllib3==2.2.3
+wcwidth==0.2.13
+Werkzeug==3.1.3
+yapf==0.43.0
+yarl==1.20.0
+zope.event==5.0
+zope.interface==7.0.3
