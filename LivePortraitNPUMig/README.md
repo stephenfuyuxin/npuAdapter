@@ -36,6 +36,7 @@ apt-get install -y ffmpeg
 
 # pip依赖
 开源仓 requirements_base.txt 和 requirements.txt
+
 requirements_base.txt
 ```shell
 numpy==1.26.4
