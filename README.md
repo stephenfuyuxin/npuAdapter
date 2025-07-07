@@ -1,2 +1,2 @@
 # npuAdapter
-record Ascend npu adapter
+record Ascend npu adapter - Small Model Adaptation and Migration.
