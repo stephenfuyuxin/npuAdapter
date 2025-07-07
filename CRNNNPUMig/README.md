@@ -134,7 +134,9 @@ pip install psutil
 执行 atc 转换成功后生成 crnn_final_bs16.om 模型文件。
 
 # 安装 ais_bench 推理工具
-参考链接：https://gitee.com/ascend/tools/tree/master/ais-bench_workload/tool/ais_bench，根据README进行安装，
+参考链接：https://gitee.com/ascend/tools/tree/master/ais-bench_workload/tool/ais_bench
+
+根据README进行安装，
 ```shell
 # 所需依赖
 aclruntime-0.0.2-cp37-cp37m-linux_aarch64.whl
