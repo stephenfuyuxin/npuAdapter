@@ -58,11 +58,41 @@ swr.cn-south-1.myhuaweicloud.com/ascendhub/rerank-nim-800i:v4-arm64 BAAI/bge-rer
 ```shell
 # docker logs nim-rerank-npuid5
 # docker exec -it nim-rerank-npuid5 /bin/bash
+```
+回显如下，
+```shell
+Support model bge-reranker-large.
+Model 'bge-reranker-large' exists.
+NPU ID: 5, CHIP ID: 0, CHIP_LOGIC_ID: 0 CHIP_TYPE: 91083, MEMORY_TYPE: HBM, CAPACITY: 65536, USAGE_RATE: 5, AVAIL_CAPACITY: 62259
+Using NPU: 0 start TEI service
+Starting TEI service on 127.0.0.1:8080...
+Use API KEY
 
+2024-12-24T10:27:08.125963Z INFO text_embeddings router: router/src/main.rs:140: Args { model_id: "/mod4/************rge", revision: None, tokenization_workers: None, dtype: None, pooling: None, max_concurrent_requests: 512, max_batch_tokens: 100000, max_batch_requests: Some(128), max_client_batch_size: 32, auto_truncate: false, hf_api_token: None, hostname: "127.0.0.1", port: 8080, uds_path: "/tmp/text-embeddings-inference-server", huggingface_hub_cache: None, payload_limit: 2000000, api_key: None, json_output: false, otlp_endpoint: None, cors_allow_origin: None }
+2024-12-24T10:27:08.700275Z WARN text_embeddings router: router/src/lib.rs:165: Could not find a Sentence Transformers config
+2024-12-24T10:27:08.700308Z INFO text_embeddings router: router/src/lib.rs:169: Maximum number of tokens per request: 512
+2024-12-24T10:27:08.702010Z INFO text_embeddings_core::tokenization: core/src/tokenization.rs:23: Starting 192 tokenization workers
+2024-12-24T10:27:53.945287Z INFO text_embeddings_router: router/src/lib.rs:194: Starting model backend
+2024-12-24T10:27:53.945838Z INFO text_embeddings_backend_python:management: backends/python/src/management.rs:54: Starting Python backend
+2024-12-24T10:28:12.727282Z WARN python-backend: text_embeddings_backend_python::logging: backends/python/src/logging.rs:39: Could not import Flash Attention enabled models: No module named 'dropout_layer_norm'
+
+2024-12-24T10:28:07.058616Z INFO text_embeddings_backend_python::management: backends/python/src/management.rs:118: Waiting for Python backend to be ready...
+2024-12-24T10:28:09.554262Z INFO python-backend: text_embeddings_backend_python::logging: backends/python/src/logging.rs:37: Server started at unix:///tmp/text-embeddings-inference-server
+2024-12-24T10:28:09.556196Z INFO text_embeddings_backend_python:management: backends/python/src/management.rs:115: Python backend ready in 12.499467583s
+2024-12-24T10:28:10.064263Z INFO text_embeddings_router::http::server: router/src/http/server.rs:1555: Starting HTTP server: 127.0.0.1:8080
+2024-12-24T10:28:10.064294Z INFO text_embeddings_router::http::server: router/src/http/server.rs:1556: Ready
+```
+
+# curl 测试功能
+```shell
 curl 127.0.0.1:8080/rerank \
     -X POST \
     -d '{"query":"What is Deep Learning?", "texts": ["Deep Learning is not...", "Deep learning is..."]}' \
     -H 'Content-Type: application/json'
+```
+结果如下，
+```shell
+[{"index":1,"score":0.99880743},{"index":0,"score":0.022977369}]
 ```
 
 # apt list --installed
