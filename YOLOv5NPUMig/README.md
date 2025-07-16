@@ -284,10 +284,10 @@ stride: [8, 16, 32]
 
 确保链接 https://ultralytics.com/assets/Arial.ttf 是有效的。如果链接无效，可以尝试访问 yolov5 的 github 仓库或其他官方资源获取正确的文件。
 
-如果网络问题导致下载失败，可以尝试手动下载该文件并放置到指定路径（如 /root/.config/Ultralytics/ ）。
+如果网络问题导致下载失败，可以尝试手动下载该文件并放置到指定路径（如 ~/.config/Ultralytics/ ）。
 ```shell
-mkdir -p /root/.config/Ultralytics/
-cp /the/path/of/Arial.ttf /root/.config/Ultralytics/
+mkdir -p ~/.config/Ultralytics/
+cp /the/path/of/Arial.ttf ~/.config/Ultralytics/
 ```
 
 ### 调整 common 文件夹的位置，放到yolov5路径下
@@ -317,6 +317,34 @@ cp /the/path/of/Arial.ttf /root/.config/Ultralytics/
 ### yolov5s.pt 转 onnx 成功
 ```shell
 /home/fuyuxin/yolov5# bash pth2onnx.sh --tag 6.1 --model yolov5s --nms_mode nms_op
+=== pth2onnx args ===
+ tag: 6.1
+ model: yolov5s
+ nms_mode: nms_op
+Updated 106 paths from the index
+HEAD is now at 3752807c YOLOv5 v6.1 release (#6739)
+方式二 nms后处理算子
+export: data=data/coco128.yaml, weights=['yolov5s.pt'], imgsz=[640, 640], batch_size=1, device=cpu, half=False, inplace=False, train=False, optimize=False, int8=False, dynamic=True, simplify=False, opset=11, verbose=False, workspace=4, nms=False, agnostic_nms=False, topk_per_class=100, topk_all=100, iou_thres=0.45, conf_thres=0.25, include=['onnx']
+YOLOv5 🚀 v6.1-0-g3752807c torch 2.1.0 CPU
+
+Fusing layers...
+Model Summary: 213 layers, 7225885 parameters, 0 gradients
+
+PyTorch: starting from yolov5s.pt with output shape (1, 3, 80, 80, 85) (14.8 MB)
+
+ONNX: starting export with onnx 1.18.0...
+ONNX: export success, saved as yolov5s.onnx (28.9 MB)
+
+Export complete (28.87s)
+Results saved to /home/fuyuxin/yolov5-npumig-wd/yolov5
+Detect:          python detect.py --weights yolov5s.onnx
+PyTorch Hub:     model = torch.hub.load('ultralytics/yolov5', 'custom', 'yolov5s.onnx')
+Validate:        python val.py --weights yolov5s.onnx
+Visualize:       https://netron.app
+Fusing layers...
+Model Summary: 213 layers, 7225885 parameters, 0 gradients
+pth导出onnx模型 Success
+
 /home/fuyuxin/yolov5# ll -h | grep ".onnx"
 28M yolov5s.onnx
 28M yolov5s_nms.onnx
@@ -351,6 +379,21 @@ bash onnx2om.sh --tag 6.1 --model yolov5s_nms --nms_mode nms_op --bs 4 --soc Asc
 ```shell
 # nms_op
 /home/fuyuxin/yolov5# bash onnx2om.sh --tag 6.1 --model yolov5s_nms --nms_mode nms_op --bs 4 --soc Ascend910B4
+=== onnx2om args ===
+ tag: 6.1
+ model: yolov5s_nms
+ nms_mode: nms_op
+ quantify: False
+ bs: 4
+ soc: Ascend910B4
+ with_aipp: False
+nms后处理算子
+ATC start working now, please wait for a moment.
+....
+ATC run success, welcome to the next use.
+
+onnx导出om模型 Success
+
 /home/fuyuxin/yolov5# ll -h | grep ".om"
 15M yolov5s_nms_bs4.om
 ```
