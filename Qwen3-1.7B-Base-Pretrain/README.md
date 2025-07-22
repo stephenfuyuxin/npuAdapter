@@ -29,6 +29,35 @@ https://modelers.cn/datasets/AI_Connect/alpaca/tree/main/data
 - torch_npu: 2.1.0.post12
 - apex: 0.1
 
+# 镜像
+包括镜像工程以及镜像启动为容器，
+## 镜像工程
+参考 detr 或者 yolov5-v6.1 的镜像工程进行自定义构建。多阶段构建时，可仅构建到 pta 阶段，最后一个阶段可注释或自定义预训练作为最后一个阶段；
+
+## 容器启动
+run.sh
+```shell
+#!/bin/bash
+docker run -it -d --net=host --shm-size=500g --privileged \
+--name qwen3pretrain-0-7  \
+--device=/dev/davinci_manager \
+--device=/dev/hisi_hdc \
+--device=/dev/devmm_svm \
+--device=/dev/davinci0 \
+--device=/dev/davinci1 \
+--device=/dev/davinci2 \
+--device=/dev/davinci3 \
+--device=/dev/davinci4 \
+--device=/dev/davinci5 \
+--device=/dev/davinci6 \
+--device=/dev/davinci7 \
+-v /usr/local/Ascend/driver:/usr/local/Ascend/driver \
+-v /usr/local/sbin:/usr/local/sbin \
+-v /home/fuyuxin:/home/fuyuxin \
+yolov5:1 \
+/bin/bash
+```
+
 # torch& torch_npu
 镜像基于 python 3.11.6 的配套，
 ```shell
