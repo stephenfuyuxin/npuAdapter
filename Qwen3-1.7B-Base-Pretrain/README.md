@@ -281,4 +281,6 @@ torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
 
 /home/fuyuxin/qwen3pretrain/MindSpeed-LLM# bash tests/0day/qwen3/qwen3-1.7b/pretrain_qwen3_1point7b_4K_ptd.sh
 ```
-在 800I A2(G5680V2 32G\*8) 可运行 Qwen3-1.7B-Base 预训练，上述 pretrain_qwen3_1point7b_4K_ptd.sh 配置为无初始权重开启随机初始化训练；
+在 800I A2(G5680V2 32G\*8) 可运行 Qwen3-1.7B-Base 预训练,
+
+上述 pretrain_qwen3_1point7b_4K_ptd.sh 举例配置为不关联已下载开源权重作为初始权重，开启随机初始化训练；
