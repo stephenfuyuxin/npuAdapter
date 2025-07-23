@@ -2,15 +2,17 @@
 在 MindSpeed 框架下实现 Qwen-3 模型的无缝运行，这里记录预训练的过程，
 
 # 开源参考
-https://github.com/NVIDIA/Megatron-LM
+**Megatron-LM**: https://github.com/NVIDIA/Megatron-LM
 
-https://gitee.com/ascend/MindSpeed-LLM
+**MindSpeed**: https://gitee.com/ascend/MindSpeed
 
-https://gitee.com/ascend/MindSpeed
+**MindSpeed-LLM**: https://gitee.com/ascend/MindSpeed-LLM
 
-https://www.modelscope.cn/Qwen/Qwen3-1.7B-Base
+**MindSpeed-LLM -> Qwen3**: https://gitee.com/ascend/MindSpeed-LLM/tree/2.1.0/tests/0day/qwen3
 
-https://modelers.cn/datasets/AI_Connect/alpaca/tree/main/data
+**Qwen3-1.7B-Base weight**: https://www.modelscope.cn/Qwen/Qwen3-1.7B-Base
+
+**Alpaca dataset**: https://modelers.cn/datasets/AI_Connect/alpaca/tree/main/data
 
 # 硬件环境
 在 MindSpeed 框架下运行 Qwen3-1.7B-Base 参考硬件配置如下，以 800I A2 单机8卡预训练为例，
