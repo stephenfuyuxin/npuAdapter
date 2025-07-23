@@ -1,5 +1,5 @@
 # Qwen3-1.7B-Base 基于 MindSpeed 预训练
-在 MindSpeed 框架下实现 Qwen-3 模型的无缝运行，这里记录预训练的过程；
+在 MindSpeed 框架下实现 Qwen-3 模型的无缝运行，这里记录预训练的过程，
 
 # 开源参考
 https://github.com/NVIDIA/Megatron-LM
@@ -20,23 +20,26 @@ https://modelers.cn/datasets/AI_Connect/alpaca/tree/main/data
 | 预训练 | 800I A2   | Ascend 910B4 32G * 8 |
 
 # 参考配套
-- driver: 24.1.rc3
-- firmware: 7.5.0.1.129
-- cann-toolkit: 910b_8.1.RC1
-- cann-kernels: 8.1.RC1_linux
-- python: 3.11.6
-- PyTorch: 2.1.0
-- torch_npu: 2.1.0.post12
-- apex: 0.1
+- **driver**: 24.1.rc3
+- **firmware**: 7.5.0.1.129
+- **cann-toolkit**: 910b_8.1.RC1
+- **cann-kernels**: 8.1.RC1_linux
+- **python**: 3.11.6
+- **PyTorch**: 2.1.0
+- **torch_npu**: 2.1.0.post12
+- **apex**: 0.1
 
 # 镜像
 包括镜像工程以及镜像启动为容器，
+
 ## 镜像工程
 参考 detr 或者 yolov5-v6.1 的镜像工程进行自定义构建。多阶段构建时，可仅构建到 pta 阶段，最后一个阶段可注释或自定义预训练作为最后一个阶段；
 
 ## 容器启动
 run.sh
 ```shell
+# vim run.sh
+
 #!/bin/bash
 docker run -it -d --net=host --shm-size=500g --privileged \
 --name qwen3pretrain-0-7  \
@@ -97,14 +100,14 @@ Successfully installed apex-0.1+ascend
 └── run.sh
 ```
 相关目录说明如下，
-- apex，Ascend apex adapter 开源仓，自动混合精度训练功能用于模型训练；
-- dataset，数据集目录用于放置 Alpaca 数据集以及数据预处理之后的数据集文件；
-- Megatron-LM，megatron 开源仓；
-- MindSpeed，mindspeed 开源仓；
-- MindSpeed-LLM，mindspeed-llm开源仓；
-- qwen3-1point7b-base，Qwen3-1.7B-Base 权重目录，用于预训练；
-- qwen3-1point7b-mcore，Qwen3-1.7B-Base 进行权重转换之后的 mcore 权重；
-- run.sh，镜像启动容器脚本；
+- **apex**: Ascend apex adapter 开源仓，自动混合精度训练功能用于模型训练；
+- **dataset**: 数据集目录用于放置 Alpaca 数据集以及数据预处理之后的数据集文件；
+- **Megatron-LM**: megatron 开源仓；
+- **MindSpeed**: mindspeed 开源仓；
+- **MindSpeed-LLM**: mindspeed-llm开源仓；
+- **qwen3-1point7b-base**: Qwen3-1.7B-Base 权重目录，用于预训练；
+- **qwen3-1point7b-mcore**: Qwen3-1.7B-Base 进行权重转换之后的 mcore 权重；
+- **run.sh**: 镜像启动容器脚本；
 
 # 获取开源仓
 ```shell
@@ -140,7 +143,7 @@ pip install transformers==4.51.3
 # 权重转换
 
 ## 权重下载
-下载 `Qwen3-1.7B-Base` 模型权重，这个权重版本仅用于预训练场景，
+下载 `Qwen3-1.7B-Base` 模型权重，这个模型权重版本仅用于预训练场景，
 ```shell
 git clone https://www.modelscope.cn/Qwen/Qwen3-1.7B-Base.git
 ```
@@ -267,6 +270,17 @@ TRAIN_ITERS=2000
 ROUTER_BALANCING_TYPE='softmax_topk'
 
 ......
+#torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
+#    $GPT_ARGS \
+#    $DATA_ARGS \
+#    $OUTPUT_ARGS \
+#    $OPTIMIZE_ARGS \
+#    $TRAIN_ARGS \
+#    $MODEL_PARALLEL_ARGS \
+#    --distributed-backend nccl \
+#    --load ${CKPT_LOAD_DIR} \
+#    --save ${CKPT_SAVE_DIR} \
+#    | tee logs/train_mcore_qwen3_1point7b.log
 torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
     $GPT_ARGS \
     $DATA_ARGS \
@@ -275,12 +289,111 @@ torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
     $TRAIN_ARGS \
     $MODEL_PARALLEL_ARGS \
     --distributed-backend nccl \
-#    --load ${CKPT_LOAD_DIR} \
     --save ${CKPT_SAVE_DIR} \
     | tee logs/train_mcore_qwen3_1point7b.log
 
 /home/fuyuxin/qwen3pretrain/MindSpeed-LLM# bash tests/0day/qwen3/qwen3-1.7b/pretrain_qwen3_1point7b_4K_ptd.sh
+......
+# 以 iteration 为 100 为例，执行完之后
+ [xxxx-xx-xx xx:xx:xx] iteration      100/     100 | consumed samples:         6400 | elapsed time per iteration (ms): 9499.5 | learning rate: 1.250000E-07 | global batch size:    64 | lm loss: 7.357863E+00 | loss scale: 1.0 | grad norm: 4.660 | number of skipped iterations:   0 | number of nan iterations:   0 |
+saving checkpoint at iteration     100 to /home/fuyuxin/qwen3pretrain/MindSpeed-LLM/ckpt/ in torch format
+  successfully saved checkpoint from iteration     100 to /home/fuyuxin/qwen3pretrain/MindSpeed-LLM/ckpt/
+(min, max) time across ranks (ms):
+    save-checkpoint ................................: (17332.36, 17332.56)
+[after training is done] datetime: xxxx-xx-xx xx:xx:xx
 ```
 在 800I A2(G5680V2 32G\*8) 可运行 Qwen3-1.7B-Base 预训练,
 
 上述 pretrain_qwen3_1point7b_4K_ptd.sh 举例配置为不关联已下载开源权重作为初始权重，开启随机初始化训练；
+
+
+# FAQ
+
+## pip 安装 antlr4-python3-runtime, transformers_stream_generator, word2number 缺少 wheel 相关包导致安装失败
+安装完 mindspeed 之后，进入 mindspeed-llm 目录，安装相关依赖时，报错
+```shell
+MindSpeed-LLM# pip install -r requirements.txt
+```
+报错信息如下，
+```shell
+  Building wheel for antlr4-python3-runtime (setup.py) ... error
+  error: subprocess-exited-with-error
+
+  × python setup.py bdist_wheel did not run successfully.
+...
+  Building wheel for transformers_stream_generator (setup.py) ... error
+  error: subprocess-exited-with-error
+
+  × python setup.py bdist_wheel did not run successfully.
+...
+  Building wheel for word2number (setup.py) ... error
+  error: subprocess-exited-with-error
+
+  × python setup.py bdist_wheel did not run successfully.
+```
+解决方法，在现有容器的基础上，安装缺失的构建工具，
+```shell
+pip install --upgrade pip setuptools wheel
+
+MindSpeed-LLM# pip install -r requirements.txt
+```
+
+## 修改 pretrain_qwen3_1point7b_4K_ptd.sh 随机初始化训练，--save: command not found报错
+```shell
+[after training is done] datetime: xxxx-xx-xx xx:xx:xx
+tests/0day/qwen3/qwen3-1.7b/pretrain_qwen3_1point7b_4K_ptd.sh: line 124: --save: command not found
+```
+这两种注释方式都不行，最后的 \ 续行符后面跟了一个被注释掉的参数 --load ${CKPT_LOAD_DIR} \，导致 真正执行的最后一行是 --save ${CKPT_SAVE_DIR}，于是 shell 把它当成一条新命令，就报了 “--save: command not found”，
+- 方式1，
+```python
+torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
+    $GPT_ARGS \
+    $DATA_ARGS \
+    $OUTPUT_ARGS \
+    $OPTIMIZE_ARGS \
+    $TRAIN_ARGS \
+    $MODEL_PARALLEL_ARGS \
+    --distributed-backend nccl \
+#   --load ${CKPT_LOAD_DIR} \
+    --save ${CKPT_SAVE_DIR} \
+    | tee logs/train_mcore_qwen3_1point7b.log
+```
+- 方式2，
+```python
+torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
+    $GPT_ARGS \
+    $DATA_ARGS \
+    $OUTPUT_ARGS \
+    $OPTIMIZE_ARGS \
+    $TRAIN_ARGS \
+    $MODEL_PARALLEL_ARGS \
+    --distributed-backend nccl \
+    # 如需加载已有权重，取消下行注释
+    # --load ${CKPT_LOAD_DIR} \
+    --save ${CKPT_SAVE_DIR} \
+    | tee logs/train_mcore_qwen3_1point7b.log
+```
+通过 整段注释+删除加载已有权重 方式，启动随机初始化训练，
+```python
+#torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
+#    $GPT_ARGS \
+#    $DATA_ARGS \
+#    $OUTPUT_ARGS \
+#    $OPTIMIZE_ARGS \
+#    $TRAIN_ARGS \
+#    $MODEL_PARALLEL_ARGS \
+#    --distributed-backend nccl \
+#    --load ${CKPT_LOAD_DIR} \
+#    --save ${CKPT_SAVE_DIR} \
+#    | tee logs/train_mcore_qwen3_1point7b.log
+torchrun $DISTRIBUTED_ARGS pretrain_gpt.py \
+    $GPT_ARGS \
+    $DATA_ARGS \
+    $OUTPUT_ARGS \
+    $OPTIMIZE_ARGS \
+    $TRAIN_ARGS \
+    $MODEL_PARALLEL_ARGS \
+    --distributed-backend nccl \
+    --save ${CKPT_SAVE_DIR} \
+    | tee logs/train_mcore_qwen3_1point7b.log
+```
